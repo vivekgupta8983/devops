@@ -60,13 +60,14 @@ Before you start working, make sure you have Terraform installed on your machine
 ### <a name="_ywjup5mlb03v"></a>**Linux (Ubuntu) Package Manager**
 1. Run the following commands at the terminal.
 ```shell
-curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -<br>sudo apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb\_release -cs) main"<br>sudo apt-get update && sudo apt-get install terraform|
+wget -O- https://apt.releases.hashicorp.com/gpg | sudo gpg --dearmor -o /usr/share/keyrings/hashicorp-archive-keyring.gpg
+echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list
 ```
 
 2. Install Terraform using the package manager.
 
 ```shell
-sudo apt update && sudo apt install terraform -y|
+sudo apt update && sudo apt install terraform -y
 ```
 
 ##
@@ -77,8 +78,23 @@ A provider is responsible for understanding API interactions and exposing resour
 
 Terraform has over a hundred providers for different technologies, and each provider then gives Terraform user access to its resources. So through AWS provider, for example, you have access to hundreds of AWS resources like EC2 instances, AWS users, etc.
 
-|terraform {<br>` `required\_providers {<br>`   `aws = {                      # provider local name<br>`     `source  = "hashicorp/aws"  # global and unique source address<br>`     `version = "~> 3.0"         # version constraint<br>`   `} <br>` `}<br>}<br><br># Configure the AWS Provider<br>provider "aws" {<br>` `region = "us-central-1" # provider configuration options<br>}|
-| :- |
+```shell
+
+terraform {
+ required_providers {
+   aws = {                      # provider local name
+     source  = "hashicorp/aws"  # global and unique source address
+     version = "~> 3.0"         # version constraint
+   } 
+ }
+}
+
+# Configure the AWS Provider
+provider "aws" {
+ region = "us-central-1" # provider configuration options
+}
+
+```
 ##
 ## <a name="_1qq774us7foi"></a><a name="_h626tcl7denx"></a>**Dependency Lock File**
 
@@ -128,8 +144,24 @@ Resources are the most important element in the Terraform language. It describes
 
 Creating resources:
 
-```hcl
-resource "<provider>\_<resource\_type>" "local\_name"{<br>`    `argument1 = value<br>`    `argument2  = value<br>    ...<br>}<br><br># Example:<br>resource "aws\_vpc" "main" {<br>`    `cidr\_block = "10.0.0.0/16"<br>`    `enable\_dns\_support = true<br><br>`    `tags = {<br>`        `"Name" = "Main VPC"<br>`    `}<br>}
+```shell
+
+resource "<provider>_<resource_type>" "local_name"{
+    argument1 = value
+    argument2  = value
+    ...
+}
+
+# Example:
+resource "aws_vpc" "main" {
+    cidr_block = "10.0.0.0/16"
+    enable_dns_support = true
+
+    tags = {
+        "Name" = "Main VPC"
+    }
+}
+
 ```
 
 ##
@@ -157,8 +189,26 @@ For production use you should constrain the acceptable provider versions via con
 
 You specify this in the tf config file in the version field for the provider:
 
-|terraform {<br>` `required\_providers {<br>`   `aws = {                      # provider local name<br>`     `source  = "hashicorp/aws"  # global and unique source address<br>`     `version = "~> 3.0"         # version constraint<br>`   `} <br>` `}<br>}<br><br># Configure the AWS Provider<br><br>provider "aws" {<br>`    `access\_key = "AKIAVT5ILJZYO4DWUWXO"<br>`    `secret\_key = "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"<br>`    `region = "us-east-1"<br>}|
-| :- |
+```shell 
+
+terraform {
+ required_providers {
+   aws = {                      # provider local name
+     source  = "hashicorp/aws"  # global and unique source address
+     version = "~> 3.0"         # version constraint
+   } 
+ }
+}
+
+# Configure the AWS Provider
+
+provider "aws" {
+    access_key = "AKIAVT5ILJZYOWUWXO"
+    secret_key = "SkdvXtauf4tRogQqTNKE6NXn0vU9Rmj6nDSKpM"
+    region = "us-east-1"
+}
+
+```
 
 **There is syntax for describing versions:**
 
@@ -182,8 +232,19 @@ The data source and name together serve as an identifier for a given resource an
 Within the block body (between { and }) are query constraints defined by the data source.
 
 
-|data "aws\_ami" "ubuntu" {<br>` `most\_recent = true<br><br>` `owners = ["self"]<br>` `tags = {<br>`   `Name   = "app-server"<br>`   `Tested = "true"<br>` `}<br>}|
-| :- |
+```shell
+
+data "aws_ami" "ubuntu" {
+ most_recent = true
+
+ owners = ["self"]
+ tags = {
+   Name   = "app-server"
+   Tested = "true"
+ }
+}
+
+```
 
 ## <a name="_nxyja9e80n7z"></a>**Output Values**
 Output values print out information about your infrastructure at the terminal, and can expose information for other Terraform configurations (e.g. modules) to use.
@@ -192,9 +253,13 @@ Output values print out information about your infrastructure at the terminal, a
 
 Each output value exported by a module must be declared using an output block. The label immediately after the output keyword is the name.
 
+```shell 
 
-|output "instance\_ip\_addr" {<br>` `value = aws\_instance.server.private\_ip <br>}|
-| :- |
+output "instance_ip_addr" {
+ value = aws_instance.server.private_ip 
+}
+
+```
 ##
 ## <a name="_1bimifh4djym"></a><a name="_xdhzgo6d1frg"></a>**Terraform Variables**
 Input variables allow you customize aspects of Terraform without using hard-coded values in the source.
@@ -203,8 +268,15 @@ Input variables allow you customize aspects of Terraform without using hard-code
 Variable declarations can appear anywhere in your configuration files. However, it's recommended to put them into a separate file called variables.tf.
 
 
-|# variable declaration<br>variable "vpc\_cidr\_block" {<br>`   `description = "CIDR block for VPC".<br>`   `default = "192.168.0.0/16"<br>}|
-| :- |
+```shell
+
+# variable declaration
+variable "vpc_cidr_block" {
+   description = "CIDR block for VPC".
+   default = "192.168.0.0/16"
+}
+
+```
 
 **Assigning values to variables**
 
@@ -237,23 +309,47 @@ Complex types a. Collection types i. list ii. map iii. set b. Structural types i
 
 **type number**
 
-|variable "web\_port" {<br>`    `description = "Web Port"<br>`    `default = 80<br>`    `type = number<br>}|
-| :- |
+```shell
+variable "web_port" {
+    description = "Web Port"
+    default = 80
+    type = number
+}
+```
 
 **type string**
 
-|variable "aws\_region" {<br>`  `description = "AWS Region"<br>`  `type = string<br>`  `default = "eu-central-1"<br>}|
-| :- |
+```shell
+variable "aws_region" {
+  description = "AWS Region"
+  type = string
+  default = "eu-central-1"
+}
+```
 
 **type bool**
 
-|variable "enable\_dns" {<br>`  `description = "DNS Support for the VPC"<br>`  `type = bool<br>`  `default = true<br>}|
-| :- |
+```shell
+variable "enable_dns" {
+  description = "DNS Support for the VPC"
+  type = bool
+  default = true
+}
+```
 
 **type list (of strings)**
 
-|variable "azs" {<br>`  `description = "AZs in the Region"<br>`  `type = list(string)<br>`  `default = [ <br>`      `"eu-central-1a", <br>`      `"eu-central-1b", <br>`      `"eu-central-1c" <br>`      `]<br>}|
-| :- |
+```shell
+variable "azs" {
+  description = "AZs in the Region"
+  type = list(string)
+  default = [ 
+      "eu-central-1a", 
+      "eu-central-1b", 
+      "eu-central-1c" 
+      ]
+}
+```
 
 **type map**
 
