@@ -12,7 +12,7 @@ s**6. Vagrant:** Builds VMs using a workflow. Best used for Creating pre-configu
 ## <a name="_vvjppewdlm39"></a>**What Is Terraform?**
 **Terraform** is one of the most popular **Infrastructure-as-code (IaC) tool**, used by DevOps teams to automate infrastructure tasks. It is used to automate the provisioning of your cloud resources. Terraform is an open-source, cloud-agnostic provisioning tool developed by HashiCorp and written in GO language.
 
-![logo-hashicorp](./assests/images/ASpose.Words.a0c03d74-dfd1-489f-957a-93f36af395ca.002.png)
+![logo-hashicorp](./assests/images/Aspose.Words.a0c03d74-dfd1-489f-957a-93f36af395ca.002.png)
 
 **Benefits of using Terraform:**
 
@@ -25,7 +25,7 @@ s**6. Vagrant:** Builds VMs using a workflow. Best used for Creating pre-configu
 ## <a name="_d7pju3rduutk"></a>**Terraform Lifecycle**
 Terraform lifecycle consists of – **init**, **plan**, **apply**, and **destroy**.
 
-![terraform-lifecycle](./assests/images/ASpose.Words.a0c03d74-dfd1-489f-957a-93f36af395ca.003.png)
+![terraform-lifecycle](./assests/images/Aspose.Words.a0c03d74-dfd1-489f-957a-93f36af395ca.003.png)
 
 1\. **Terraform init** initializes the (local) Terraform environment. Usually executed only once per session.
 2\. **Terraform plan** compares the Terraform state with the as-is state in the cloud, builds and displays an
@@ -52,7 +52,7 @@ Read our blog to know more about **Terraform Providers**
 **8. Apply**: It is one of the stages in the Terraform lifecycle where it applies the changes real/current state of the infrastructure in order to achieve the desired state.
 ##
 ## <a name="_ccwurlp04any"></a><a name="_9cspn6bcp3xs"></a>**Terraform Installation**
-Before you start working, make sure you have Terraform installed on your machine, it can be installed on any OS, say Windows, macOS, Linux, or others. Terraform installation is an easy process and can be done in a few minutes.![Terraform installation](./assests/images/ASpose.Words.a0c03d74-dfd1-489f-957a-93f36af395ca.004.jpeg)
+Before you start working, make sure you have Terraform installed on your machine, it can be installed on any OS, say Windows, macOS, Linux, or others. Terraform installation is an easy process and can be done in a few minutes.![Terraform installation](./assests/images/Aspose.Words.a0c03d74-dfd1-489f-957a-93f36af395ca.004.jpeg)
 ### <a name="_33nr244qzapi"></a>**Windows**
 1. Download the Windows binary for 32 or 64-bit CPUs from <https://www.terraform.io/downloads>.
 1. Unzip the package.
@@ -71,7 +71,7 @@ Before you start working, make sure you have Terraform installed on your machine
 ## <a name="_36hhprgbizxv"></a><a name="_cmhv1ctks9f2"></a>**Terraform Providers**
 A provider is responsible for understanding API interactions and exposing resources. It is an executable plug-in that contains the code necessary to interact with the API of the service. Terraform configurations must declare which providers they require so that Terraform can install and use them.
 
-![Terraform provider api call](./assests/images/ASpose.Words.a0c03d74-dfd1-489f-957a-93f36af395ca.005.png)
+![Terraform provider api call](./assests/images/Aspose.Words.a0c03d74-dfd1-489f-957a-93f36af395ca.005.png)
 
 Terraform has over a hundred providers for different technologies, and each provider then gives Terraform user access to its resources. So through AWS provider, for example, you have access to hundreds of AWS resources like EC2 instances, AWS users, etc.
 
@@ -86,7 +86,7 @@ If a particular provider already has a selection recorded in the lock file, Terr
 
 You can override that behavior by adding the -upgrade option when you run terraform init,
 
-![](./assests/images/ASpose.Words.a0c03d74-dfd1-489f-957a-93f36af395ca.006.png)
+![](./assests/images/Aspose.Words.a0c03d74-dfd1-489f-957a-93f36af395ca.006.png)
 
 
 ## <a name="_eip9h2ioe7uz"></a>**Terraform Refresh**
@@ -95,7 +95,7 @@ Terraform can create an infrastructure based on configuration you specified.
 
 It can happen that the infrastructure gets modified manually.
 
-![](./assests/images/ASpose.Words.a0c03d74-dfd1-489f-957a-93f36af395ca.007.png)
+![](./assests/images/Aspose.Words.a0c03d74-dfd1-489f-957a-93f36af395ca.007.png)
 
 **Challenge**
 
@@ -103,7 +103,7 @@ The terraform refresh command will check the latest state of your infrastructure
 
 and update the state file accordingly.
 
-![](./assests/images/ASpose.Words.a0c03d74-dfd1-489f-957a-93f36af395ca.008.png)
+![](./assests/images/Aspose.Words.a0c03d74-dfd1-489f-957a-93f36af395ca.008.png)
 
 You shouldn't typically need to use this command, because Terraform
 
@@ -271,7 +271,7 @@ Complex types a. Collection types i. list ii. map iii. set b. Structural types i
 ## <a name="_a0kq2zqj6fj6"></a><a name="_kzjoczvfvg50"></a>**Terraform Configuration Files**
 Configuration files are a set of files used to describe infrastructure in Terraform and have the file extensions **.tf** and **.tf.json**. Terraform uses a declarative model for defining infrastructure. Configuration files let you write a configuration that declares your desired state. Configuration files are made up of resources with settings and values representing the desired state of your infrastructure.
 
-![terraform config files](./assests/images/ASpose.Words.a0c03d74-dfd1-489f-957a-93f36af395ca.009.png)
+![terraform config files](./assests/images/Aspose.Words.a0c03d74-dfd1-489f-957a-93f36af395ca.009.png)
 
 A Terraform configuration is made up of one or more files in a directory, provider binaries, plan files, and state files once Terraform has run the configuration.
 
@@ -532,7 +532,7 @@ Terraform is one of the great IaC tools with which, you can deploy all your infr
 
 Terraform has a really nice feature for importing existing resources, which makes the migration of existing infrastructure into Terraform a lot easier.
 
-![terraform-import-workflow-diagram](./assests/images/ASpose.Words.a0c03d74-dfd1-489f-957a-93f36af395ca.010.png)
+![terraform-import-workflow-diagram](./assests/images/Aspose.Words.a0c03d74-dfd1-489f-957a-93f36af395ca.010.png)
 
 Currently, Terraform can only import resources into the state. It does not generate a configuration for them. Because of this, prior to running **terraform import** it is necessary to write manually a resource configuration block for the resource, to which the imported object will be mapped. For example:
 
@@ -602,7 +602,7 @@ There are two main types of provisioners: **local-exec** and **remote-exec**.
 
 These allow us to invoke local executable after a resource is created, what this means is that a local-exec provisioner can run an executable (command) on the machine that is applying the Terraform (local):
 
-![](./assests/images/ASpose.Words.a0c03d74-dfd1-489f-957a-93f36af395ca.011.png)
+![](./assests/images/Aspose.Words.a0c03d74-dfd1-489f-957a-93f36af395ca.011.png)
 
 In this code we are creating an EC2 instance and within the EC2 resource block we have a Provisioner block.  This is a local-exec provisioner that will run a command that places the Private IP of the instance created by the resource block in a file on the local machine called private\_ips.txt
 
@@ -621,7 +621,7 @@ Below is an example of the code you would use to have a remote-exec install Ngin
 
 This code has 3 blocks: A resource block, a nested provisioner block and a nested connection block. Nested meaning that they are within the resource block.
 
-![](./assests/images/ASpose.Words.a0c03d74-dfd1-489f-957a-93f36af395ca.012.png)
+![](./assests/images/Aspose.Words.a0c03d74-dfd1-489f-957a-93f36af395ca.012.png)
 
 
 
