@@ -59,14 +59,16 @@ Before you start working, make sure you have Terraform installed on your machine
 1. Move the Terraform binary to the Windows PATH.
 ### <a name="_ywjup5mlb03v"></a>**Linux (Ubuntu) Package Manager**
 1. Run the following commands at the terminal.
-
-|curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -<br>sudo apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb\_release -cs) main"<br>sudo apt-get update && sudo apt-get install terraform|
-| :- |
+```shell
+curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -<br>sudo apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb\_release -cs) main"<br>sudo apt-get update && sudo apt-get install terraform|
+```
 
 2. Install Terraform using the package manager.
 
-|sudo apt update && sudo apt install terraform -y|
-| :- |
+```shell
+sudo apt update && sudo apt install terraform -y|
+```
+
 ##
 ## <a name="_36hhprgbizxv"></a><a name="_cmhv1ctks9f2"></a>**Terraform Providers**
 A provider is responsible for understanding API interactions and exposing resources. It is an executable plug-in that contains the code necessary to interact with the API of the service. Terraform configurations must declare which providers they require so that Terraform can install and use them.
@@ -285,14 +287,15 @@ A Terraform configuration is made up of one or more files in a directory, provid
 ## <a name="_o3h05nlr2x5y"></a>**Getting started using Terraform**
 To get started building infrastructure resources using Terraform, there are few things that you should take care of. The general steps to deploy a resource(s) in the cloud are:
 
-1. Set up a Cloud Account on any cloud provider ([AWS](https://k21academy.com/amazon-web-services/aws-solutions-architect/create-aws-free-tier-account/), [Azure](https://k21academy.com/microsoft-azure/create-free-microsoft-azure-trial-account/), [OCI](https://k21academy.com/oracle-cloud/video-register-free-oracle-cloud-trial-account/))
-1. Install Terraform
-1. Add a provider – AWS, Azure, OCI, GCP, or others
-1. Write configuration files
-1. Initialize Terraform Providers
-1. PLAN (DRY RUN) using terraform plan
-1. APPLY (Create a Resource) using terraform apply
-1. DESTROY (Delete a Resource) using terraform destroy
+1. Set up a Cloud Account on any cloud provider
+2. Install Terraform
+3. Add a provider – AWS, Azure, OCI, GCP, or others
+4. Write configuration files
+5. Initialize Terraform Providers
+6. PLAN (DRY RUN) using terraform plan
+7. APPLY (Create a Resource) using terraform apply
+8. DESTROY (Delete a Resource) using terraform destroy
+
 ##
 
 ## <a name="_2jw8y1crkqeh"></a><a name="_ss0fvgxhs3mc"></a>**Loops**
