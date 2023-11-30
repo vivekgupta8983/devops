@@ -12,7 +12,7 @@ s**6. Vagrant:** Builds VMs using a workflow. Best used for Creating pre-configu
 ## <a name="_vvjppewdlm39"></a>**What Is Terraform?**
 **Terraform** is one of the most popular **Infrastructure-as-code (IaC) tool**, used by DevOps teams to automate infrastructure tasks. It is used to automate the provisioning of your cloud resources. Terraform is an open-source, cloud-agnostic provisioning tool developed by HashiCorp and written in GO language.
 
-![logo-hashicorp](./assests/images/ASpose.Words.a0c03d74-dfd1-489f-957a-93f36af395ca.002.png)
+![logo-hashicorp](./assests/images/Aspose.Words.a0c03d74-dfd1-489f-957a-93f36af395ca.002.png)
 
 **Benefits of using Terraform:**
 
@@ -25,7 +25,7 @@ s**6. Vagrant:** Builds VMs using a workflow. Best used for Creating pre-configu
 ## <a name="_d7pju3rduutk"></a>**Terraform Lifecycle**
 Terraform lifecycle consists of – **init**, **plan**, **apply**, and **destroy**.
 
-![terraform-lifecycle](./assests/images/ASpose.Words.a0c03d74-dfd1-489f-957a-93f36af395ca.003.png)
+![terraform-lifecycle](./assests/images/Aspose.Words.a0c03d74-dfd1-489f-957a-93f36af395ca.003.png)
 
 1\. **Terraform init** initializes the (local) Terraform environment. Usually executed only once per session.
 2\. **Terraform plan** compares the Terraform state with the as-is state in the cloud, builds and displays an
@@ -59,19 +59,21 @@ Before you start working, make sure you have Terraform installed on your machine
 1. Move the Terraform binary to the Windows PATH.
 ### <a name="_ywjup5mlb03v"></a>**Linux (Ubuntu) Package Manager**
 1. Run the following commands at the terminal.
-
-|curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -<br>sudo apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb\_release -cs) main"<br>sudo apt-get update && sudo apt-get install terraform|
-| :- |
+```shell
+curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -<br>sudo apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb\_release -cs) main"<br>sudo apt-get update && sudo apt-get install terraform|
+```
 
 2. Install Terraform using the package manager.
 
-|sudo apt update && sudo apt install terraform -y|
-| :- |
+```shell
+sudo apt update && sudo apt install terraform -y|
+```
+
 ##
 ## <a name="_36hhprgbizxv"></a><a name="_cmhv1ctks9f2"></a>**Terraform Providers**
 A provider is responsible for understanding API interactions and exposing resources. It is an executable plug-in that contains the code necessary to interact with the API of the service. Terraform configurations must declare which providers they require so that Terraform can install and use them.
 
-![Terraform provider api call](./assests/images/ASpose.Words.a0c03d74-dfd1-489f-957a-93f36af395ca.005.png)
+![Terraform provider api call](./assests/images/Aspose.Words.a0c03d74-dfd1-489f-957a-93f36af395ca.005.png)
 
 Terraform has over a hundred providers for different technologies, and each provider then gives Terraform user access to its resources. So through AWS provider, for example, you have access to hundreds of AWS resources like EC2 instances, AWS users, etc.
 
@@ -86,7 +88,7 @@ If a particular provider already has a selection recorded in the lock file, Terr
 
 You can override that behavior by adding the -upgrade option when you run terraform init,
 
-![](./assests/images/ASpose.Words.a0c03d74-dfd1-489f-957a-93f36af395ca.006.png)
+![](./assests/images/Aspose.Words.a0c03d74-dfd1-489f-957a-93f36af395ca.006.png)
 
 
 ## <a name="_eip9h2ioe7uz"></a>**Terraform Refresh**
@@ -95,7 +97,7 @@ Terraform can create an infrastructure based on configuration you specified.
 
 It can happen that the infrastructure gets modified manually.
 
-![](./assests/images/ASpose.Words.a0c03d74-dfd1-489f-957a-93f36af395ca.007.png)
+![](./assests/images/Aspose.Words.a0c03d74-dfd1-489f-957a-93f36af395ca.007.png)
 
 **Challenge**
 
@@ -103,7 +105,7 @@ The terraform refresh command will check the latest state of your infrastructure
 
 and update the state file accordingly.
 
-![](./assests/images/ASpose.Words.a0c03d74-dfd1-489f-957a-93f36af395ca.008.png)
+![](./assests/images/Aspose.Words.a0c03d74-dfd1-489f-957a-93f36af395ca.008.png)
 
 You shouldn't typically need to use this command, because Terraform
 
@@ -271,7 +273,7 @@ Complex types a. Collection types i. list ii. map iii. set b. Structural types i
 ## <a name="_a0kq2zqj6fj6"></a><a name="_kzjoczvfvg50"></a>**Terraform Configuration Files**
 Configuration files are a set of files used to describe infrastructure in Terraform and have the file extensions **.tf** and **.tf.json**. Terraform uses a declarative model for defining infrastructure. Configuration files let you write a configuration that declares your desired state. Configuration files are made up of resources with settings and values representing the desired state of your infrastructure.
 
-![terraform config files](./assests/images/ASpose.Words.a0c03d74-dfd1-489f-957a-93f36af395ca.009.png)
+![terraform config files](./assests/images/Aspose.Words.a0c03d74-dfd1-489f-957a-93f36af395ca.009.png)
 
 A Terraform configuration is made up of one or more files in a directory, provider binaries, plan files, and state files once Terraform has run the configuration.
 
@@ -285,14 +287,15 @@ A Terraform configuration is made up of one or more files in a directory, provid
 ## <a name="_o3h05nlr2x5y"></a>**Getting started using Terraform**
 To get started building infrastructure resources using Terraform, there are few things that you should take care of. The general steps to deploy a resource(s) in the cloud are:
 
-1. Set up a Cloud Account on any cloud provider ([AWS](https://k21academy.com/amazon-web-services/aws-solutions-architect/create-aws-free-tier-account/), [Azure](https://k21academy.com/microsoft-azure/create-free-microsoft-azure-trial-account/), [OCI](https://k21academy.com/oracle-cloud/video-register-free-oracle-cloud-trial-account/))
-1. Install Terraform
-1. Add a provider – AWS, Azure, OCI, GCP, or others
-1. Write configuration files
-1. Initialize Terraform Providers
-1. PLAN (DRY RUN) using terraform plan
-1. APPLY (Create a Resource) using terraform apply
-1. DESTROY (Delete a Resource) using terraform destroy
+1. Set up a Cloud Account on any cloud provider
+2. Install Terraform
+3. Add a provider – AWS, Azure, OCI, GCP, or others
+4. Write configuration files
+5. Initialize Terraform Providers
+6. PLAN (DRY RUN) using terraform plan
+7. APPLY (Create a Resource) using terraform apply
+8. DESTROY (Delete a Resource) using terraform destroy
+
 ##
 
 ## <a name="_2jw8y1crkqeh"></a><a name="_ss0fvgxhs3mc"></a>**Loops**
@@ -621,7 +624,7 @@ Below is an example of the code you would use to have a remote-exec install Ngin
 
 This code has 3 blocks: A resource block, a nested provisioner block and a nested connection block. Nested meaning that they are within the resource block.
 
-![](./assests/images/ASpose.Words.a0c03d74-dfd1-489f-957a-93f36af395ca.012.png)
+![](./assests/images/Aspose.Words.a0c03d74-dfd1-489f-957a-93f36af395ca.012.png)
 
 
 
