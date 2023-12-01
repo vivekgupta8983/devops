@@ -66,7 +66,7 @@ resource "aws_nat_gateway" "nat_gw" {
   tags = {
     Name = "DevCloudGeek-nat-gw"
   }
-  depends_on = [aws_internet_gateway.igw]
+  depends_on = [aws_eip.eip]
 }
 
 resource "aws_route_table" "priv" {

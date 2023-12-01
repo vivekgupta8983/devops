@@ -17,3 +17,7 @@ variable "enable_dns_hostnames" {
   type    = bool
   default = false
 }
+
+variable "instancetype" {
+  default = "t2.micro"
+}
