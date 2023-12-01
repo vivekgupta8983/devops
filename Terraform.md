@@ -353,18 +353,51 @@ variable "azs" {
 
 **type map**
 
-|variable "amis" {<br>`  `type = map(string)<br>`  `default = {<br>`    `"eu-central-1" = "ami-0dcc0ebde7b2e00db",<br>`    `"us-west-1" = "ami-04a50faf2a2ec1901"<br>`  `}<br>}|
-| :- |
+```shell
+
+variable "amis" {
+  type = map(string)
+  default = {
+    "eu-central-1" = "ami-0dcc0ebde7b2e00db",
+    "us-west-1" = "ami-04a50faf2a2ec1901"
+  }
+}
+```
 
 **type tuple**
 
-|variable "my\_instance" {<br>`    `type = tuple([string, number, bool])  <br>`    `default = ["t2.micro", 1, true ]<br>}|
-| :- |
+```shell
+variable "amis" {
+  type = map(string)
+  default = {
+    "eu-central-1" = "ami-0dcc0ebde7b2e00db",
+    "us-west-1" = "ami-04a50faf2a2ec1901"
+  }
+}
+
+```
 
 **type object**
 
-|variable "egress\_dsg" {<br>`    `type = object({<br>`        `from\_port = number<br>`        `to\_port = number<br>`        `protocol = string<br>`        `cidr\_blocks = list(string)<br>`    `})<br>`    `default = {<br>`     `from\_port = 0,<br>`     `to\_port = 65365,<br>`     `protocol = "tcp",<br>`     `cidr\_blocks = ["100.0.0.0/16", "200.0.0.0/16", "0.0.0.0/0"]<br>`    `}<br>}|
-| :- |
+```shell
+
+variable "egress_dsg" {
+    type = object({
+        from_port = number
+        to_port = number
+        protocol = string
+        cidr_blocks = list(string)
+    })
+    default = {
+     from_port = 0,
+     to_port = 65365,
+     protocol = "tcp",
+     cidr_blocks = ["100.0.0.0/16", "200.0.0.0/16", "0.0.0.0/0"]
+    }
+}
+
+
+```
 ##
 ## <a name="_a0kq2zqj6fj6"></a><a name="_kzjoczvfvg50"></a>**Terraform Configuration Files**
 Configuration files are a set of files used to describe infrastructure in Terraform and have the file extensions **.tf** and **.tf.json**. Terraform uses a declarative model for defining infrastructure. Configuration files let you write a configuration that declares your desired state. Configuration files are made up of resources with settings and values representing the desired state of your infrastructure.
@@ -406,8 +439,14 @@ The count meta-argument is defined by the Terraform language and can be used to 
 count is a looping technique and can be used with modules and with every resource type.
 
 
-|# creating multiple EC2 instances using count<br>resource "aws\_instance" "server" {<br>`  `ami = "ami-06ec8443c2a35b0ba"<br>`  `instance\_type = "t2.micro"<br>`  `count = 3  # creating 3 resources<br>}|
-| :- |
+```shell
+# creating multiple EC2 instances using count
+resource "aws_instance" "server" {
+  ami = "ami-06ec8443c2a35b0ba"
+  instance_type = "t2.micro"
+  count = 3  # creating 3 resources
+}
+```
 
 In blocks where count is set, an additional count object is available.
 
@@ -421,23 +460,57 @@ for\_each was introduced more recently to overcome the downsides of count.
 If your resources are almost identical, count is appropriate. If some of their arguments need distinct values that can't be directly derived from an integer, it's safer to use for\_each.
 
 
-|# declaring a variable<br>variable "users" {<br>`  `type = list(string)<br>`  `default = ["demo-user", "admin1", "john"]<br>}<br><br># creating IAM users<br>resource "aws\_iam\_user" "test" {<br>`  `for\_each = toset(var.users) # converts a list to a set<br>`  `name = each.key<br>}|
-| :- |
+```shell
+
+# declaring a variable
+variable "users" {
+  type = list(string)
+  default = ["demo-user", "admin1", "john"]
+}
+
+# creating IAM users
+resource "aws_iam_user" "test" {
+  for_each = toset(var.users) # converts a list to a set
+  name = each.key
+}
+```
 
 ### <a name="_3uv9iwbdhl3z"></a>**For Expressions**
 A for expression creates a complex type value by transforming another complex type value.
 
 
-|variable "names" {<br>`    `type = list<br>`    `default = ["daniel", "ada'", "john wick"]<br>}<br><br>output "show\_names" {<br>`    `# similar to Python's list comprehension<br>`    `value = [for n in var.names : upper(n)]<br>}<br><br>output "short\_upper\_names" {<br>`  `# filter the resulting list by specifying a condition:<br>`  `value = [for name in var.names : upper(name) if length(name) > 7]<br>}|
-| :- |
+```shell
+variable "names" {
+    type = list
+    default = ["daniel", "ada'", "john wick"]
+}
+
+output "show_names" {
+    # similar to Python's list comprehension
+    value = [for n in var.names : upper(n)]
+}
+
+output "short_upper_names" {
+  # filter the resulting list by specifying a condition:
+  value = [for name in var.names : upper(name) if length(name) > 7]
+}
+```
 
 If you run terraform apply -auto-approve you'll get:
 
 Outputs:
 
 
-|short\_upper\_names = [<br>`  `"JOHN WICK",<br>]<br>show\_names = [<br>`  `"DANIEL",<br>`  `"ADA'",<br>`  `"JOHN WICK",<br>]|
-| :- |
+```shell
+short_upper_names = [
+  "JOHN WICK",
+]
+show_names = [
+  "DANIEL",
+  "ADA'",
+  "JOHN WICK",
+]
+```
 
 ##
 ## <a name="_vhzcsbdyeo39"></a>**Terraform Taint**
@@ -454,7 +527,10 @@ Delete and Recreate the resource
 
 With the terraform taint command we can manually mark a Terraform-managed resource as tainted, this will force it to be destroyed and recreated on the next apply.
 
-eg. terraform taint aws\_instance.my\_ec2  note how this applies to a specific resource rather than a whole template.
+```shell
+eg. terraform taint aws_instance.my_ec2
+```
+note how this applies to a specific resource rather than a whole template.
 
 The terraform taint command does modify the infrastructure, it merely alters its status in the state file to be 'tainted'. This marks it for destruction and recreation on the next terraform apply.
 
@@ -466,14 +542,26 @@ In some cases, you might want a resource to be destroyed and re-created even whe
 
 Note that Terraform Taint has been deprecated in v0.15.2 onwards, now the best practice is considered to be using terraform apply with the "-replace" tag.
 
-eg. terraform apply -replace aws\_instance.my\_ec2
+```shell 
+eg. terraform apply -replace aws_instance.my_ec2
+```
 ##
 ## <a name="_69xfiv73j8wd"></a><a name="_lxypz6iogvfe"></a>**Splat Expressions**
 A splat expression provides a more concise way to express a common operation that could otherwise be performed with a for expression.
 
 
-|# Launch an EC2 instance<br>resource "aws\_instance" "server" {<br>`  `ami = "ami-05cafdf7c9f772ad2"<br>`  `instance\_type = "t2.micro"<br>`  `count = 3<br>}<br><br>output "private\_addresses"{<br>`  `value = aws\_instance.server[\*].private\_ip  # splat expression<br>}|
-| :- |
+```shell
+# Launch an EC2 instance
+resource "aws_instance" "server" {
+  ami = "ami-05cafdf7c9f772ad2"
+  instance_type = "t2.micro"
+  count = 3
+}
+
+output "private_addresses"{
+  value = aws_instance.server[*].private_ip  # splat expression
+}
+```
 
 ## <a name="_shn6jj988nrx"></a>**Dynamic Blocks**
 Dynamic blocks act much like a for expression, but produce nested blocks instead of a complex typed value. They iterate over a given complex value, and generate a nested block for each element of that complex value.
@@ -483,24 +571,67 @@ They are supported inside resource, data, provider, and provisioner blocks.
 A dynamic block produces nested blocks instead of a complex typed value. It iterates over a given complex value, and generates a nested block for each element of that complex value.
 
 
-|# Declaring a variable of type list<br>variable "ingress\_ports" {<br>`  `description = "List Of Ingress Ports"<br>`  `type = list(number)<br>`  `default = [22, 80, 110, 143]<br>}<br><br>resource "aws\_default\_security\_group" "default\_sec\_group" {<br>`  `vpc\_id = aws\_vpc.main.id<br><br>` `# Creating the ingress rules using dynamic blocks<br>` `dynamic "ingress"{  # it produces ingress nested blocks<br>`    `for\_each = var.ingress\_ports # iterating over the list variable<br>`    `iterator = iport<br>`    `content {<br>`        `from\_port = iport.value<br>`        `to\_port = iport.value<br>`        `protocol = "tcp"<br>`        `cidr\_blocks = ["0.0.0.0/0"]<br>`     `}<br>`   `}<br>}|
-| :- |
+```shell
+# Declaring a variable of type list
+variable "ingress_ports" {
+  description = "List Of Ingress Ports"
+  type = list(number)
+  default = [22, 80, 110, 143]
+}
+
+resource "aws_default_security_group" "default_sec_group" {
+  vpc_id = aws_vpc.main.id
+
+ # Creating the ingress rules using dynamic blocks
+ dynamic "ingress"{  # it produces ingress nested blocks
+    for_each = var.ingress_ports # iterating over the list variable
+    iterator = iport
+    content {
+        from_port = iport.value
+        to_port = iport.value
+        protocol = "tcp"
+        cidr_blocks = ["0.0.0.0/0"]
+     }
+   }
+}
+
+```
 
 ## <a name="_9k59tknuhzrx"></a>**Conditional Expressions**
 A conditional expression uses the value of a boolean expression to select one of two values.
 
 
-|Syntax: condition ? true\_val : false\_val|
-| :- |
+```shell
+Syntax: condition ? true_val : false_val
+```
 
 If condition is true then the result is true\_val. If condition is false then the result is false\_val.
 
 The condition can be any expression that resolves to a boolean value. This will usually be an expression that uses the equality, comparison, or logical operators.
 
+```shell
+variable "istest" {
+    type = bool
+    default = true
+}
+
+# Creating the test-server instance if `istest` equals true
+resource "aws_instance" "test-server" {
+  ami = "ami-05cafdf7c9f772ad2"
+  instance_type = "t2.micro"
+  count = var.istest == true ? 1:0  # conditional expression
+}
+
+# Creating the prod-server instance if `istest` equals false
+resource "aws_instance" "prod-server" {
+  ami = "ami-05cafdf7c9f772ad2"
+  instance_type = "t2.large"   # it's not free tier eligible
+  count = var.istest == false ? 1:0  # conditional expression
+}
+
+```
 
 
-|variable "istest" {<br>`    `type = bool<br>`    `default = true<br>}<br><br># Creating the test-server instance if `istest` equals true<br>resource "aws\_instance" "test-server" {<br>`  `ami = "ami-05cafdf7c9f772ad2"<br>`  `instance\_type = "t2.micro"<br>`  `count = var.istest == true ? 1:0  # conditional expression<br>}<br><br># Creating the prod-server instance if `istest` equals false<br>resource "aws\_instance" "prod-server" {<br>`  `ami = "ami-05cafdf7c9f772ad2"<br>`  `instance\_type = "t2.large"   # it's not free tier eligible<br>`  `count = var.istest == false ? 1:0  # conditional expression<br>}|
-| :- |
 ##
 ## <a name="_r58eg6zwfb5"></a><a name="_85ca92lfsj5n"></a>**Terraform Locals**
 Terraform local values or simply locals are named values that you can refer to in your configuration.
@@ -510,8 +641,44 @@ Compared to variables, Terraform locals do not change values during or between T
 Locals are available only in the current module. They are locally scoped.
 
 
-|# the local values are declared in a single `locals` block<br>locals {<br>`  `owner = "DevOps Corp Team"<br>`  `project = "Online Store"<br>`  `cidr\_blocks = ["172.16.10.0/24", "172.16.20.0/24", "172.16.30.0/24"]<br>`  `common-tags = {<br>`      `Name = "dev"<br>`      `Environment = "development"<br>`      `Version = 1.10<br>`  `}<br>}<br><br># Create a VPC.<br>resource "aws\_vpc" "dev\_vpc" {<br>`  `cidr\_block = "172.16.0.0/16"<br>`  `tags = local.common-tags<br>} <br><br># Create a subnet in the VPC<br>resource "aws\_subnet" "dev\_subnets" {<br>`  `vpc\_id            = aws\_vpc.dev\_vpc.id<br>`  `cidr\_block        = local.cidr\_blocks[0]<br>`  `availability\_zone = "eu-central-1a"<br><br>`  `tags = local.common-tags<br>}<br><br># Create an Internet Gateway Resource<br>resource "aws\_internet\_gateway" "dev\_igw" {<br>`  `vpc\_id = aws\_vpc.dev\_vpc.id  <br>`  `tags = {<br>`    `"Name" = "${local.common-tags["Name"]}-igw"<br>`    `"Version" = "${local.common-tags["Version"]}"<br>`  `}<br>}|
-| :- |
+```shell
+# the local values are declared in a single `locals` block
+locals {
+  owner = "DevOps Corp Team"
+  project = "Online Store"
+  cidr_blocks = ["172.16.10.0/24", "172.16.20.0/24", "172.16.30.0/24"]
+  common-tags = {
+      Name = "dev"
+      Environment = "development"
+      Version = 1.10
+  }
+}
+
+# Create a VPC.
+resource "aws_vpc" "dev_vpc" {
+  cidr_block = "172.16.0.0/16"
+  tags = local.common-tags
+} 
+
+# Create a subnet in the VPC
+resource "aws_subnet" "dev_subnets" {
+  vpc_id            = aws_vpc.dev_vpc.id
+  cidr_block        = local.cidr_blocks[0]
+  availability_zone = "eu-central-1a"
+
+  tags = local.common-tags
+}
+
+# Create an Internet Gateway Resource
+resource "aws_internet_gateway" "dev_igw" {
+  vpc_id = aws_vpc.dev_vpc.id  
+  tags = {
+    "Name" = "${local.common-tags["Name"]}-igw"
+    "Version" = "${local.common-tags["Version"]}"
+  }
+}
+
+```
 
 Note: Local values are created by a locals block (plural), but you reference them as attributes on an object named local (singular).
 
@@ -529,8 +696,58 @@ You can experiment with the behavior of Terraform's built-in functions from the 
 Examples:
 
 
-|> max(5, 12, 9)<br>12<br><br>> min(12, 54, 3)<br>3<br><br>> format("There are %d lights", 4)<br>There are 4 lights<br><br>> join(", ", ["foo", "bar", "baz"])<br>foo, bar, baz<br><br>> split(",", "foo,bar,baz")<br>[<br>` `"foo",<br>` `"bar",<br>` `"baz",<br>]<br><br>> replace("hello world", "/w.\*d/", "everybody")<br>hello everybody<br><br>> substr("hello world", 1, 4)<br>ello<br><br>> element(["a", "b", "c"], 1)<br>b<br><br>> lookup({a="ay", b="bee"}, "a", "what?")<br>ay<br>> lookup({a="ay", b="bee"}, "c", "what?")<br>what?<br><br>> slice(["a", "b", "c", "d"], 1, 3)<br>[<br>` `"b",<br>` `"c",<br>]<br><br>> timestamp()<br>"2022-04-02T05:52:48Z"<br><br>> formatdate("DD MMM YYYY hh:mm ZZZ", "2022-01-02T23:12:01Z")<br>02 Jan 2022 23:12 UTC<br><br>> cidrhost("10.1.2.240/28", 1)<br>10\.1.2.241<br><br>> cidrhost("10.1.2.240/28", 14)<br>10\.1.2.254|
-| :- |
+```shell
+> max(5, 12, 9)
+12
+
+> min(12, 54, 3)
+3
+
+> format("There are %d lights", 4)
+There are 4 lights
+
+> join(", ", ["foo", "bar", "baz"])
+foo, bar, baz
+
+> split(",", "foo,bar,baz")
+[
+ "foo",
+ "bar",
+ "baz",
+]
+
+> replace("hello world", "/w.*d/", "everybody")
+hello everybody
+
+> substr("hello world", 1, 4)
+ello
+
+> element(["a", "b", "c"], 1)
+b
+
+> lookup({a="ay", b="bee"}, "a", "what?")
+ay
+> lookup({a="ay", b="bee"}, "c", "what?")
+what?
+
+> slice(["a", "b", "c", "d"], 1, 3)
+[
+ "b",
+ "c",
+]
+
+> timestamp()
+"2022-04-02T05:52:48Z"
+
+> formatdate("DD MMM YYYY hh:mm ZZZ", "2022-01-02T23:12:01Z")
+02 Jan 2022 23:12 UTC
+
+> cidrhost("10.1.2.240/28", 1)
+10.1.2.241
+
+> cidrhost("10.1.2.240/28", 14)
+10.1.2.254
+```
 
 ## <a name="_to963jdbq65j"></a>**Backends and Remote State**
 ### <a name="_x6b0k3xu4qn8"></a>**Backends**
@@ -555,10 +772,17 @@ On the AWS console go to Amazon S3 and create a bucket.
 
 Configure Terraform to use the remote state from within the S3 bucket.
 
-
-
-|terraform {<br>` `backend "s3" {<br>`   `bucket = "bucket\_name"<br>`   `key    = "s3-backend.tfstate"<br>`   `region = "eu-central-1"<br>`   `access\_key = "AKIA56LJEQNM"<br>`   `secret\_key = "0V9cw4CVON2w1"<br>` `}<br>}|
-| :- |
+```shell
+terraform {
+ backend "s3" {
+   bucket = "bucket_name"
+   key    = "s3-backend.tfstate"
+   region = "eu-central-1"
+   access_key = "AKIA56LJEQNM"
+   secret_key = "0V9cw4CVON2w1"
+ }
+}
+```
 
 Run terraform init to initialize the backend.
 ### <a name="_59dqf6st0tir"></a>**Configure Remote State on Terraform Cloud**
@@ -568,9 +792,24 @@ Create your organization or join a new one.
 
 Configure Terraform to use the remote state from within the S3 bucket.
 
+```shell
+terraform {
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "~> 3.0"
+    }
+  }
+  cloud {
+    organization = "master-terraform"  # should already exist on Terraform cloud
+    workspaces {
+      name = "DevOps-Production"
+    }
+  }
+}
 
-|terraform {<br>`  `required\_providers {<br>`    `aws = {<br>`      `source  = "hashicorp/aws"<br>`      `version = "~> 3.0"<br>`    `}<br>`  `}<br>`  `cloud {<br>`    `organization = "master-terraform"  # should already exist on Terraform cloud<br>`    `workspaces {<br>`      `name = "DevOps-Production"<br>`    `}<br>`  `}<br>}|
-| :- |
+
+```
 
 Authenticate to Terraform Cloud to proceed with initialization.
 
@@ -597,9 +836,20 @@ The modules that are imported from other directories into the root module are ca
 
 Calling a child module from within the root module:
 
+```shell
+module "myec2" {
+  # path to the module's directory
+  # the source argument is mandatory for all modules.
+  source = "../modules/ec2"
 
-|module "myec2" {<br>`  `# path to the module's directory<br>`  `# the source argument is mandatory for all modules.<br>`  `source = "../modules/ec2"<br><br>`  `# module inputs<br>`  `ami\_id = var.ami\_id<br>`  `instance\_type = var.instance\_type<br>`  `servers = var.servers<br>}|
-| :- |
+  # module inputs
+  ami_id = var.ami_id
+  instance_type = var.instance_type
+  servers = var.servers
+}
+
+
+```
 
 It's good practice to start building everything as a module, create a library of modules to share with your team and from the very beginning to start thinking of your entire infrastructure as a collection of reusable modules.
 
@@ -614,9 +864,9 @@ The TF\_LOG\_PATH variable will create the specified file and append the logs ge
 
 Example:
 
-
-|export TF\_LOG\_PATH=terraform.log|
-| :- |
+```shell
+export TF_LOG_PATH=terraform.log
+```
 
 terraform apply
 
@@ -636,13 +886,18 @@ Terraform has a really nice feature for importing existing resources, which make
 Currently, Terraform can only import resources into the state. It does not generate a configuration for them. Because of this, prior to running **terraform import** it is necessary to write manually a resource configuration block for the resource, to which the imported object will be mapped. For example:
 
 
-|resource "aws\_instance" "import\_example" { <br>`  `# ...instance configuration... <br>}|
-| :- |
+```shell
+resource "aws_instance" "import_example" { 
+  # ...instance configuration... 
+}
+```
 
 Now **terraform import** can be run to attach an existing instance to this resource configuration:
 
-|<p>$ terraform import aws\_instance.import\_example </p><p>i-03efafa258104165f</p>|
-| :- |
+```shell
+$ terraform import aws_instance.import_example 
+i-03efafa258104165f
+```
 
 This command locates the AWS instance with ID i-03efafa258104165f (which has been created outside Terraform) and attaches it to the name **aws\_instance.import\_example** in the Terraform state.
 
@@ -671,12 +926,15 @@ Then you can specify this file when using terraform apply to be certain that onl
 
 Syntax:
 
-|terraform plan -out=filepath|
-| :- |
+```shell
+terraform plan -out=filepath
+```
 
 Then to use the file with apply, be in the directory with your plan file:
 
+```shell
 terraform apply filename
+```
 
 Where "filename" is replaced with whatever you named your plan file. 
 
