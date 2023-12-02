@@ -18,6 +18,10 @@ variable "enable_dns_hostnames" {
   default = false
 }
 
-variable "instancetype" {
-  default = "t2.micro"
+# variable "instancetype" {
+#   default = "t2.micro"
+# }
+
+variable "openvpn_ip" {
+  default = "10.0.1.0"
 }
