@@ -25,3 +25,7 @@ variable "enable_dns_hostnames" {
 variable "openvpn_ip" {
   default = "10.0.1.0"
 }
+
+variable "project_name" {
+  default = "DevCloudGeek"
+}

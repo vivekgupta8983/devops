@@ -14,7 +14,7 @@ resource "aws_subnet" "public_subnet" {
   map_public_ip_on_launch = true
 
   tags = {
-    Name = "DevCloudGeek-public-${data.aws_availability_zones.available.names[count.index]}"
+    Name = "${var.project_name}-public-${data.aws_availability_zones.available.names[count.index]}"
   }
 }
 
